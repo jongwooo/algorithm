@@ -17,8 +17,7 @@ for _ in range(n):
             if len(stack) == 0:
                 print(-1)
             else:
-                print(stack[-1])
-                stack.pop()
+                print(stack.pop())
         elif cmd == 'size':
             print(len(stack))
         elif cmd == 'empty':
