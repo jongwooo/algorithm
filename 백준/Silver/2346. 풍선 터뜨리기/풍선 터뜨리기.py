@@ -13,4 +13,4 @@ while balloons:
     i, paper = balloons.popleft()
     exploded.append(i)
     balloons.rotate(-paper + 1 if paper > 0 else -paper)
-print(' '.join(map(str, exploded)))
+print(*exploded)
