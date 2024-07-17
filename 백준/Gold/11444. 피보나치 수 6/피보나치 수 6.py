@@ -1,17 +1,26 @@
 import sys
 
 
-def fibonacci(n):
-    if n in f:
-        return f[n]
-    if n % 2 == 0:
-        val = fibonacci(n // 2) * (2 * fibonacci(n // 2 - 1) + fibonacci(n // 2))
-    else:
-        val = fibonacci((n + 1) // 2) ** 2 + fibonacci((n - 1) // 2) ** 2
-    f[n] = val % 1_000_000_007
-    return f[n]
+def mul(a, b):
+    result = [[0, 0], [0, 0]]
+    for i in range(2):
+        for j in range(2):
+            num = 0
+            for k in range(2):
+                num += a[i][k] * b[k][j]
+            result[i][j] = num % 1_000_000_007
+    return result
+
+
+def power(b):
+    fib = [[1, 1], [1, 0]]
+    if b == 1:
+        return fib
+    x = power(b // 2)
+    if b % 2 == 0:
+        return mul(x, x)
+    return mul(mul(x, x), fib)
 
 
 n = int(sys.stdin.readline())
-f = {0: 0, 1: 1}
-print(fibonacci(n))
+print(power(n)[1][0])
