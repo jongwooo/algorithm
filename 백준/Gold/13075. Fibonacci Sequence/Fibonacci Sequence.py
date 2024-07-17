@@ -24,5 +24,5 @@ def power(b):
 
 t = int(sys.stdin.readline())
 for _ in range(t):
-    x = int(sys.stdin.readline())
-    print(power(x)[1][0])
+    n = int(sys.stdin.readline())
+    print(power(n)[1][0])
