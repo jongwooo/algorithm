@@ -1,12 +1,12 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Solution {
 
 	static int N, M;
+	static String[] s1, s2;
 
 	public static void main(String[] args) throws Exception {
 //		System.setIn(new FileInputStream("input.txt"));
@@ -18,16 +18,31 @@ public class Solution {
 			st = new StringTokenizer(br.readLine());
 			N = Integer.parseInt(st.nextToken());
 			M = Integer.parseInt(st.nextToken());
-			final Set<String> strSet = new HashSet<>();
 			st = new StringTokenizer(br.readLine());
+			s1 = new String[N];
 			for (int i = 0; i < N; i++) {
-				strSet.add(st.nextToken());
+				s1[i] = st.nextToken();
 			}
 			st = new StringTokenizer(br.readLine());
-			int result = 0;
+			s2 = new String[M];
 			for (int i = 0; i < M; i++) {
-				if (strSet.contains(st.nextToken())) {
+				s2[i] = st.nextToken();
+			}
+			Arrays.sort(s1);
+			Arrays.sort(s2);
+			int result = 0;
+			int p1 = 0;
+			int p2 = 0;
+			while (p1 < N && p2 < M) {
+				final int compare = s1[p1].compareTo(s2[p2]);
+				if (compare == 0) {
 					result++;
+					p1++;
+					p2++;
+				} else if (compare < 0) {
+					p1++;
+				} else if (compare > 0) {
+					p2++;
 				}
 			}
 			sb.append("#")
