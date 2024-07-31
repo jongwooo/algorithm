@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.PriorityQueue;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Solution {
@@ -10,7 +9,7 @@ public class Solution {
 	static long[] X, Y;
 	static int[] parent;
 	static double E;
-	static PriorityQueue<Edge> edges;
+	static Edge[] edges;
 
 	public static void main(String[] args) throws Exception {
 //		System.setIn(new FileInputStream("input.txt"));
@@ -35,16 +34,17 @@ public class Solution {
 			for (int i = 0; i < N; i++) {
 				parent[i] = i;
 			}
-			edges = new PriorityQueue<>();
+			edges = new Edge[N * (N - 1) / 2];
+			int index = 0;
 			for (int i = 0; i < N - 1; i++) {
 				for (int j = i + 1; j < N; j++) {
 					final long L = (X[i] - X[j]) * (X[i] - X[j]) + (Y[i] - Y[j]) * (Y[i] - Y[j]);
-					edges.add(new Edge(i, j, L));
+					edges[index++] = new Edge(i, j, L);
 				}
 			}
+			Arrays.sort(edges);
 			double result = 0.0;
-			while (!edges.isEmpty()) {
-				final Edge edge = edges.poll();
+			for (final Edge edge : edges) {
 				if (find(edge.from) != find(edge.to)) {
 					union(edge.from, edge.to);
 					result += edge.cost;
