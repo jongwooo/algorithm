@@ -1,3 +1,6 @@
+import heapq
+
+
 def find(i):
     global parent
     if parent[i] != i:
@@ -25,11 +28,10 @@ for test_case in range(1, T + 1):
     edges = []
     for i in range(N - 1):
         for j in range(i + 1, N):
-            edges.append(((X[i] - X[j]) ** 2 + (Y[i] - Y[j]) ** 2, i, j))
-    edges.sort()
+            heapq.heappush(edges, ((X[i] - X[j]) ** 2 + (Y[i] - Y[j]) ** 2, i, j))
     min_cost = 0.0
-    for edge in edges:
-        L, i, j = edge
+    while edges:
+        L, i, j = heapq.heappop(edges)
         if find(i) != find(j):
             union(i, j)
             min_cost += L
