@@ -2,9 +2,10 @@ import sys
 
 
 def find(x):
+    global parent
     if parent[x] != x:
-        return find(parent[x])
-    return x
+        parent[x] = find(parent[x])
+    return parent[x]
 
 
 def union(a, b):
