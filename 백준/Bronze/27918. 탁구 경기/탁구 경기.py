@@ -9,7 +9,5 @@ for _ in range(n):
     else:
         y += 1
     if abs(x - y) > 1:
-        print(f'{x}:{y}')
         break
-else:
-    print(f'{x}:{y}')
+print(f'{x}:{y}')
