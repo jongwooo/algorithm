@@ -6,9 +6,7 @@ public class Solution {
 
 	static int[] gyuyeong;
 	static int[] inyeong;
-	static int[] deck;
 	static boolean[] exist;
-	static boolean[] isSelected;
 	static int win;
 
 	public static void main(String[] args) throws Exception {
@@ -20,9 +18,7 @@ public class Solution {
 			win = 0;
 			gyuyeong = new int[9];
 			inyeong = new int[9];
-			deck = new int[9];
 			exist = new boolean[18];
-			isSelected = new boolean[9];
 			st = new StringTokenizer(br.readLine());
 			for (int i = 0; i < 9; i++) {
 				gyuyeong[i] = Integer.parseInt(st.nextToken());
@@ -33,9 +29,9 @@ public class Solution {
 				if (exist[i]) {
 					continue;
 				}
-				deck[idx++] = i + 1;
+				inyeong[idx++] = i + 1;
 			}
-			dfs(0);
+			permutation(inyeong, 0, 9, 9);
 			sb.append("#")
 					.append(testCase)
 					.append(" ")
@@ -47,8 +43,8 @@ public class Solution {
 		System.out.println(sb);
 	}
 
-	public static void dfs(final int count) {
-		if (count == 9) {
+	public static void permutation(final int[] arr, final int depth, final int n, final int r) {
+		if (depth == r) {
 			int gyuyeongPoint = 0;
 			int inyeongPoint = 0;
 			for (int i = 0; i < 9; i++) {
@@ -63,14 +59,16 @@ public class Solution {
 			}
 			return;
 		}
-		for (int i = 0; i < 9; i++) {
-			if (isSelected[i]) {
-				continue;
-			}
-			inyeong[count] = deck[i];
-			isSelected[i] = true;
-			dfs(count + 1);
-			isSelected[i] = false;
+		for (int i = depth; i < n; i++) {
+			swap(arr, depth, i);
+			permutation(arr, depth + 1, n, r);
+			swap(arr, depth, i);
 		}
+	}
+
+	public static void swap(int[] arr, int depth, int i) {
+		final int temp = arr[depth];
+		arr[depth] = arr[i];
+		arr[i] = temp;
 	}
 }
