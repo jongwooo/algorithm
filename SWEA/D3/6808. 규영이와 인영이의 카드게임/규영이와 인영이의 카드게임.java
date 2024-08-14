@@ -31,7 +31,7 @@ public class Solution {
 				}
 				inyeong[idx++] = i + 1;
 			}
-			permutation(inyeong, 0, 9, 9);
+			permutation(0);
 			sb.append("#")
 					.append(testCase)
 					.append(" ")
@@ -43,8 +43,8 @@ public class Solution {
 		System.out.println(sb);
 	}
 
-	public static void permutation(final int[] arr, final int depth, final int n, final int r) {
-		if (depth == r) {
+	public static void permutation(final int depth) {
+		if (depth == 9) {
 			int gyuyeongPoint = 0;
 			int inyeongPoint = 0;
 			for (int i = 0; i < 9; i++) {
@@ -59,16 +59,16 @@ public class Solution {
 			}
 			return;
 		}
-		for (int i = depth; i < n; i++) {
-			swap(arr, depth, i);
-			permutation(arr, depth + 1, n, r);
-			swap(arr, depth, i);
+		for (int i = depth; i < 9; i++) {
+			swap(inyeong, depth, i);
+			permutation(depth + 1);
+			swap(inyeong, depth, i);
 		}
 	}
 
-	public static void swap(int[] arr, int depth, int i) {
-		final int temp = arr[depth];
-		arr[depth] = arr[i];
-		arr[i] = temp;
+	public static void swap(final int[] arr, final int first, final int second) {
+		final int temp = arr[first];
+		arr[first] = arr[second];
+		arr[second] = temp;
 	}
 }
