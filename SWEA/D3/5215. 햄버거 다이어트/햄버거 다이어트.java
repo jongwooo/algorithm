@@ -26,7 +26,22 @@ public class Solution {
 				points[i] = Integer.parseInt(st.nextToken());
 				calories[i] = Integer.parseInt(st.nextToken());
 			}
-			combination(0, 0, 0);
+			for (int i = 0; i < 1 << N; i++) {
+				int pointSum = 0;
+				int calorieSum = 0;
+				for (int j = 0; j < N; j++) {
+					if ((i & 1 << j) != 0) {
+						pointSum += points[j];
+						calorieSum += calories[j];
+					}
+				}
+				if (calorieSum > L) {
+					continue;
+				}
+				if (result < pointSum) {
+					result = pointSum;
+				}
+			}
 			sb.append("#")
 					.append(testCase)
 					.append(" ")
@@ -34,19 +49,5 @@ public class Solution {
 					.append("\n");
 		}
 		System.out.println(sb);
-	}
-
-	private static void combination(final int index, final int pointSum, final int calorieSum) {
-		if (calorieSum > L) {
-			return;
-		}
-		if (index == N) {
-			if (result < pointSum) {
-				result = pointSum;
-			}
-			return;
-		}
-		combination(index + 1, pointSum + points[index], calorieSum + calories[index]);
-		combination(index + 1, pointSum, calorieSum);
 	}
 }
