@@ -48,26 +48,8 @@ public class Solution {
 			}
 			return;
 		}
-		final int temp = plan[month];
-		// 1일
-		plan[month] = 0;
-		dfs(month + 1, price + temp * prices[0]);
-		plan[month] = temp;
-		// 1달
-		plan[month] = 0;
+		dfs(month + 1, price + plan[month] * prices[0]);
 		dfs(month + 1, price + prices[1]);
-		plan[month] = temp;
-		// 3달
-		if (month <= 10) {
-			final int[] tempPlan = new int[3];
-			for (int i = 0; i < 3; i++) {
-				tempPlan[i] = plan[month + i];
-				plan[month + i] = 0;
-			}
-			dfs(month + 1, price + prices[2]);
-			for (int i = 0; i < 3; i++) {
-				plan[month + i] = tempPlan[i];
-			}
-		}
+		dfs(month + 3, price + prices[2]);
 	}
 }
