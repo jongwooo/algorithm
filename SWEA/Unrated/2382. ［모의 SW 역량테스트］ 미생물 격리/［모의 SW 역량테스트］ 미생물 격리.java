@@ -7,8 +7,8 @@ import java.util.StringTokenizer;
 
 public class Solution {
 
-	static final int[] dirX = { 0, -1, 1, 0, 0 };
-	static final int[] dirY = { 0, 0, 0, -1, 1 };
+	static final int[] dirX = { -1, 1, 0, 0 };
+	static final int[] dirY = { 0, 0, -1, 1 };
 
 	static int N, M, K;
 	static List<Microbe> microbes;
@@ -29,7 +29,7 @@ public class Solution {
 				final int x = Integer.parseInt(st.nextToken());
 				final int y = Integer.parseInt(st.nextToken());
 				final int count = Integer.parseInt(st.nextToken());
-				final int dir = Integer.parseInt(st.nextToken());
+				final int dir = Integer.parseInt(st.nextToken()) - 1;
 				microbes.add(new Microbe(x * N + y, x, y, count, dir));
 			}
 			for (int time = 0; time < M; time++) {
@@ -90,14 +90,14 @@ class Microbe implements Comparable<Microbe> {
 	}
 
 	public void turnBack() {
-		if (dir == 1) {
-			dir = 2;
-		} else if (dir == 2) {
+		if (dir == 0) {
 			dir = 1;
-		} else if (dir == 3) {
-			dir = 4;
-		} else if (dir == 4) {
+		} else if (dir == 1) {
+			dir = 0;
+		} else if (dir == 2) {
 			dir = 3;
+		} else if (dir == 3) {
+			dir = 2;
 		}
 	}
 
