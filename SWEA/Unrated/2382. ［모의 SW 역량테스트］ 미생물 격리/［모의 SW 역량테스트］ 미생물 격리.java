@@ -37,7 +37,7 @@ public class Solution {
 					final Microbe microbe = microbes.get(i);
 					microbe.x += dirX[microbe.dir];
 					microbe.y += dirY[microbe.dir];
-					microbe.num = microbe.x * N + microbe.y;
+					microbe.pos = microbe.x * N + microbe.y;
 					if (microbe.x == 0 || microbe.y == 0 || microbe.x == N - 1 || microbe.y == N - 1) {
 						microbe.count /= 2;
 						microbe.turnBack();
@@ -51,7 +51,7 @@ public class Solution {
 				for (int i = 0; i < microbes.size() - 1; i++) {
 					final Microbe now = microbes.get(i);
 					final Microbe next = microbes.get(i + 1);
-					if (now.num == next.num) {
+					if (now.pos == next.pos) {
 						now.count += next.count;
 						microbes.remove(i + 1);
 						i--;
@@ -74,15 +74,15 @@ public class Solution {
 
 class Microbe implements Comparable<Microbe> {
 
-	int num;
+	int pos;
 	int x;
 	int y;
 	int count;
 	int dir;
 
-	public Microbe(final int num, final int x, final int y, final int count, final int dir) {
+	public Microbe(final int pos, final int x, final int y, final int count, final int dir) {
 		super();
-		this.num = num;
+		this.pos = pos;
 		this.x = x;
 		this.y = y;
 		this.count = count;
@@ -103,9 +103,9 @@ class Microbe implements Comparable<Microbe> {
 
 	@Override
 	public int compareTo(final Microbe other) {
-		if (this.num == other.num) {
+		if (this.pos == other.pos) {
 			return other.count - this.count;
 		}
-		return this.num - other.num;
+		return this.pos - other.pos;
 	}
 }
