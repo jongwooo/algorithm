@@ -36,9 +36,7 @@ public class Solution {
 					sb.append(a == b ? 1 : 0);
 				}
 			}
-
 			sb.append("\n");
-
 		}
 		System.out.print(sb);
 	}
