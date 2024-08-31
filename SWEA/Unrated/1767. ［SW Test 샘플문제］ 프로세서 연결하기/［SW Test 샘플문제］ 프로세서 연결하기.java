@@ -34,7 +34,7 @@ public class Solution {
 					cell[i][j] = Integer.parseInt(st.nextToken());
 					if (cell[i][j] == 1) {
 						maxynosCount++;
-						if (i == 0 || i == N - 1 || j == 0 || j == N - 1) {
+						if (isEdgeCell(i, j)) {
 							alreadyConnected++;
 							continue;
 						}
@@ -80,7 +80,7 @@ public class Solution {
 					cy -= dirY[d];
 					break;
 				}
-				if (isConnected(cx, cy)) {
+				if (isEdgeCell(cx, cy)) {
 					newConnect++;
 					newWireLength = connect(core, d);
 					break;
@@ -101,7 +101,7 @@ public class Solution {
 		int length = 0;
 		int x = core.x;
 		int y = core.y;
-		while (!isConnected(x, y)) {
+		while (!isEdgeCell(x, y)) {
 			length++;
 			x += dirX[d];
 			y += dirY[d];
@@ -110,7 +110,7 @@ public class Solution {
 		return length;
 	}
 
-	private static boolean isConnected(final int x, final int y) {
+	private static boolean isEdgeCell(final int x, final int y) {
 		return x == 0 || x == N - 1 || y == 0 || y == N - 1;
 	}
 }
