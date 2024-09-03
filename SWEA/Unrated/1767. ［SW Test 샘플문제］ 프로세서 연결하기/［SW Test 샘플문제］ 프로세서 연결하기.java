@@ -17,7 +17,7 @@ public class Solution {
 	static int maxConnected;
 	static int minLength;
 
-	public static void main(final String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 		final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		final StringBuilder sb = new StringBuilder();
 		StringTokenizer st;
