@@ -55,6 +55,9 @@ public class Solution {
 	}
 
 	private static void dfs(final int depth, final int connected, final int length) {
+        if (maxynosCount - alreadyConnected + connected - depth  < maxConnected) {
+            return;
+        }
 		if (depth == maxynosCount - alreadyConnected) {
 			if (connected < maxConnected) {
 				return;
