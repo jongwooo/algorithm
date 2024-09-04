@@ -2,16 +2,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Solution {
+class Solution {
 
 	static int[] prices;
-	static int[] plan;
-	static int minPrice;
-
-	static {
-		prices = new int[4];
-		plan = new int[13];
-	}
+	static int[] plans;
+	static int[] dp;
 
 	public static void main(String[] args) throws Exception {
 		final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -20,36 +15,25 @@ public class Solution {
 		final int T = Integer.parseInt(br.readLine());
 		for (int testCase = 1; testCase <= T; testCase++) {
 			st = new StringTokenizer(br.readLine());
+			prices = new int[4];
+			plans = new int[13];
 			for (int i = 0; i < 4; i++) {
 				prices[i] = Integer.parseInt(st.nextToken());
 			}
 			st = new StringTokenizer(br.readLine());
 			for (int i = 1; i <= 12; i++) {
-				plan[i] = Integer.parseInt(st.nextToken());
+				final int days = Integer.parseInt(st.nextToken());
+				plans[i] = Math.min(plans[i - 1] + days * prices[0], plans[i - 1] + prices[1]);
+				if (i >= 3) {
+					plans[i] = Math.min(plans[i], plans[i - 3] + prices[2]);
+				}
 			}
-			minPrice = prices[3];
-			dfs(1, 0);
 			sb.append("#")
 					.append(testCase)
 					.append(" ")
-					.append(minPrice)
+					.append(Math.min(plans[12], prices[3]))
 					.append("\n");
 		}
 		System.out.println(sb);
-	}
-
-	static void dfs(final int month, final int price) {
-		if (minPrice < price) {
-			return;
-		}
-		if (month > 12) {
-			if (price < minPrice) {
-				minPrice = price;
-			}
-			return;
-		}
-		dfs(month + 1, price + plan[month] * prices[0]);
-		dfs(month + 1, price + prices[1]);
-		dfs(month + 3, price + prices[2]);
 	}
 }
