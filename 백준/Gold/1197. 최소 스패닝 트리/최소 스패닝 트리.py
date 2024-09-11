@@ -1,31 +1,35 @@
 import sys
 
+sys.setrecursionlimit(100_000)
+
 
 def find(x):
-    if root[x] == x:
-        return x
-    root[x] = find(root[x])
-    return root[x]
+    global parent
+    if parent[x] != x:
+        parent[x] = find(parent[x])
+    return parent[x]
 
 
-def union(x, y):
-    x = find(x)
-    y = find(y)
-    root[y] = x
+def union(a, b):
+    global parent
+    a = find(a)
+    b = find(b)
+    if a < b:
+        parent[b] = a
+    else:
+        parent[a] = b
 
 
 v, e = map(int, sys.stdin.readline().split())
+parent = [i for i in range(v + 1)]
 edges = []
 for _ in range(e):
-    edges.append(list(map(int, sys.stdin.readline().split())))
-root = dict()
-for i in range(1, v + 1):
-    root[i] = i
-edges = sorted(edges, key=lambda x: x[2])
-weight = 0
-for edge in edges:
-    if find(edge[0]) == find(edge[1]):
-        continue
-    weight += edge[2]
-    union(edge[0], edge[1])
-print(weight)
+    a, b, c = map(int, sys.stdin.readline().split())
+    edges.append((a, b, c))
+edges.sort(key=lambda x: x[2])
+result = 0
+for a, b, cost in edges:
+    if find(a) != find(b):
+        union(a, b)
+        result += cost
+print(result)
