@@ -3,14 +3,13 @@
 using namespace std;
 
 int main() {
-    cin.tie(nullptr);
-    cout.tie(nullptr);
     ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-    double A, B;
-    cin >> A >> B;
+    double a, b;
+    cin >> a >> b;
 
     cout.precision(12);
     cout << fixed;
-    cout << A / B;
+    cout << a / b;
 }
