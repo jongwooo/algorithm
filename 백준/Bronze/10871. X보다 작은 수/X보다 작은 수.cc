@@ -7,16 +7,13 @@ int main() {
 	cin.tie(nullptr);
 
 	int n, x;
-	int a[10000];
-
 	cin >> n >> x;
-	for (int i = 0; i < n; i++) {
-		cin >> a[i];
-	}
 
+	int v;
 	for (int i = 0; i < n; i++) {
-		if (a[i] < x) {
-			cout << a[i] << " ";
+		cin >> v;
+		if (v < x) {
+			cout << v << " ";
 		}
 	}
 }
