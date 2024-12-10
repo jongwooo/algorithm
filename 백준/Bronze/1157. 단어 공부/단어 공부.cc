@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 #include <string>
 
 using namespace std;
@@ -12,9 +11,10 @@ int main() {
 
 	cin >> s;
 
-	transform(s.begin(), s.end(), s.begin(), ::toupper);
 	for (char c : s) {
-		alphabets[c - 'A']++;
+		if (c < 97) alphabets[c - 65]++;
+		else alphabets[c - 97]++;
+		
 	}
 	int maxCount = 0, maxIndex = 0;
 	for (int i = 0; i < 26; i++) {
