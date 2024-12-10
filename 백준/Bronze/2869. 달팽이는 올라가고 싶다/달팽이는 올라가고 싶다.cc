@@ -11,8 +11,7 @@ int main() {
 		cout << "1";
 		return 0;
 	}
-	int day = 1;
-	day += (v - a) / (a - b);
-	if ((v - a) % (a - b)) day++;
+	int day = (v - b) / (a - b);
+	if ((v - b) % (a - b)) day++;
 	cout << day;
 }
