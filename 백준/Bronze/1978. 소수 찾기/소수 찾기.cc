@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int n, num;
-int cnt = 0;
+int n, num, cnt = 0;
 
 bool isPrimeNumuber(int number) {
 	if (number == 1) return false;
