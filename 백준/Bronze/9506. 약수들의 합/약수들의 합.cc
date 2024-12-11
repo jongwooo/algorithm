@@ -3,7 +3,7 @@
 using namespace std;
 
 int n;
-int arr[100000];
+int arr[100];
 int cnt, sum;
 
 int main() {
