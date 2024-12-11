@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 int m, n;
@@ -7,7 +8,7 @@ int minNum = 10000;
 
 bool isPrimeNumuber(int number) {
 	if (number == 1) return false;
-	for (int i = 2; i < number; i++) {
+	for (int i = 2; i <= int(sqrt(number)); i++) {
 		if (number % i == 0) return false;
 	}
 	return true;
