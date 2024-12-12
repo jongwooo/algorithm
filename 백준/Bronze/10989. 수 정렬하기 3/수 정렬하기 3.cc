@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int arr[10001] = { 0, };
+int arr[10'001] = { 0, };
 
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
@@ -12,7 +12,7 @@ int main() {
 		cin >> tmp;
 		arr[tmp]++;
 	}
-	for (int i = 1; i <= 10000; i++) {
+	for (int i = 1; i <= 10'000; i++) {
 		for (int j = 0; j < arr[i]; j++) {
 			cout << i << '\n';
 		}
