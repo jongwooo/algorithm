@@ -14,7 +14,7 @@ int main() {
 	cin.tie(0)->sync_with_stdio(0);
 	
 	int n, x, y;
-	vector<pair<int, int>> v;
+	vector<pii> v;
 	cin >> n;
 	for (int i = 0; i < n; i++) {
 		cin >> x >> y;
