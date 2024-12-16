@@ -3,7 +3,7 @@ using namespace std;
 
 typedef long long int lli;
 
-int gcd(long long int a, lli b) {
+int gcd(lli a, lli b) {
 	if (b == 0) return a;
 	return gcd(b, a % b);
 }
