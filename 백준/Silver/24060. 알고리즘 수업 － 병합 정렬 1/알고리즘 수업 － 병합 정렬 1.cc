@@ -43,7 +43,6 @@ void merge_sort(int a[], int p, int r) {
 int main() {
 	cin.tie(0)->sync_with_stdio(0);
 
-
 	cin >> n >> k;
 	a = new int[n + 1];
 	tmp = new int[n + 1];
