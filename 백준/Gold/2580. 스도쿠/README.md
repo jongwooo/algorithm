@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 140928 KB, 시간: 3288 ms
+메모리: 2020 KB, 시간: 212 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2024년 2월 27일 11:59:54
+2024년 12월 23일 23:16:14
 
 ### 문제 설명
 
@@ -37,7 +37,7 @@
 
 <p>이와 같이 빈 칸을 차례로 채워 가면 다음과 같은 최종 결과를 얻을 수 있다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="width: 240px; height: 230px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/fe68d938-770d-46ea-af71-a81076bc3963/-/preview/" style="width: 240px; height: 230px;"></p>
 
 <p>게임 시작 전 스도쿠 판에 쓰여 있는 숫자들의 정보가 주어질 때 모든 빈 칸이 채워진 최종 모습을 출력하는 프로그램을 작성하시오.</p>
 
