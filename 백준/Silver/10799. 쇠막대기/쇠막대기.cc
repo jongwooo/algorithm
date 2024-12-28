@@ -12,7 +12,7 @@ int main() {
 	int cnt = 0;
 	for (int i = 0; s[i] != '\0'; i++) {
 		if (s[i] == '(') st.push(s[i]);
-		else if (i > 0 && s[i - 1] == '(') {
+		else if (s[i - 1] == '(') {
 			st.pop();
 			cnt += st.size();
 		}
