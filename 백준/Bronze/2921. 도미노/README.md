@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 31120 KB, 시간: 96 ms
+메모리: 2020 KB, 시간: 0 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2024년 2월 5일 00:29:25
+2025년 1월 11일 09:37:33
 
 ### 문제 설명
 
@@ -20,7 +20,7 @@
 
 <p>크기가 N인 도미노 세트는 N 또는 그보다 작거나 같은 점을 포함하는 가능한 도미노를 모두 포함하고 있고, 각 도미노는 중복되지 않는다. 다음은 크기가 2인 도미노 세트이다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="width: 325px; height: 67px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/28c6158c-74d6-4bf5-88c7-fa1c8de9dd88/-/preview/" style="width: 325px; height: 67px;"></p>
 
 <p>N을 입력받은 뒤, 크기가 N인 도미노 세트에는 점이 몇 개 찍혀 있는지 구하는 프로그램을 작성하시오.</p>
 
