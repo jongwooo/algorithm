@@ -1,27 +1,17 @@
 #include <iostream>
-#include <string>
-
 using namespace std;
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(nullptr);
+	cin.tie(0)->sync_with_stdio(0);
 
-	string s;
-	int indexes[26];
-	fill_n(indexes, 26, -1);
-
+	char s[101];
 	cin >> s;
-	int v;
-	for (int i = 0; i < s.length(); i++) {
-		v = s[i] - 'a';
-		if (indexes[v] != -1) {
-			continue;
-		}
-		indexes[v] = i;
+	int idx[26];
+	fill_n(idx, 26, -1);
+	for (int i = 0; s[i] != '\0'; i++) {
+		if (idx[s[i] - 'a'] == -1) idx[s[i] - 'a'] = i;
 	}
-
-	for (int i : indexes) {
-		cout << i << " ";
+	for (int i = 0; i < 26; i++) {
+		cout << idx[i] << ' ';
 	}
 }
