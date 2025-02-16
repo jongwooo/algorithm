@@ -8,6 +8,6 @@ int main() {
 	cin >> s;
 	for (int i = 0; s[i] != '\0'; i++) {
 		cout << s[i];
-		if (i != 0 && (i + 1) % 10 == 0) cout << '\n';
+		if ((i + 1) % 10 == 0) cout << '\n';
 	}
 }
