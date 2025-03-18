@@ -7,6 +7,7 @@ def in_range(x, y):
 
 
 def bfs(x, y):
+    global visited
     queue = deque([(x, y)])
     visited[x][y] = 1
     area = 0
