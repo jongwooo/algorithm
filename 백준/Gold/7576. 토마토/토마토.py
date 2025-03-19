@@ -1,32 +1,38 @@
+import sys
 from collections import deque
 
 
+def in_range(i, j):
+    return 0 <= i < n and 0 <= j < m
+
+
 def bfs():
+    global box
     while queue:
-        y, x = queue.popleft()
-        for i in range(4):
-            ny = y + dy[i]
-            nx = x + dx[i]
-            if 0 <= ny < n and 0 <= nx < m and box[ny][nx] == 0:
-                box[ny][nx] = box[y][x] + 1
-                queue.append((ny, nx))
+        x, y = queue.popleft()
+        for dx, dy in dirs:
+            nx = x + dx
+            ny = y + dy
+            if in_range(nx, ny) and not box[nx][ny]:
+                queue.append((nx, ny))
+                box[nx][ny] = box[x][y] + 1
 
 
-dy = [-1, 1, 0, 0]
-dx = [0, 0, 1, -1]
-m, n = map(int, input().split())
-box = [list(map(int, input().split())) for _ in range(n)]
-queue = deque()
-for row in range(n):
-    for col in range(m):
-        if box[row][col] == 1:
-            queue.append((row, col))
+dirs = ((-1, 0), (0, 1), (1, 0), (0, -1))
+m, n = map(int, sys.stdin.readline().split())
+box = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
+queue = deque([])
+for i in range(n):
+    for j in range(m):
+        if box[i][j] == 1:
+            queue.append((i, j))
 bfs()
-min_day = 0
+min_days = 0
 for b in box:
     for i in range(m):
-        if b[i] == 0:
+        if not b[i]:
             print(-1)
             exit()
-    min_day = max(min_day, max(b))
-print(min_day - 1)
+        if min_days < b[i]:
+            min_days = b[i]
+print(min_days - 1)
