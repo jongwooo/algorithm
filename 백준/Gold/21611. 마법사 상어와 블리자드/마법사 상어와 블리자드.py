@@ -2,27 +2,27 @@ import sys
 
 
 def initialize():
+    global beads
     dx = (0, 1, 0, -1)
     dy = (-1, 0, 1, 0)
-    x = N // 2
-    y = N // 2
-    idx = 0
+    dd = 0
     dist = 1
-    direction = 0
     move = 0
+    idx = 0
+    x, y = n // 2, n // 2
     while True:
         for _ in range(dist):
+            idx2pos[idx] = (x, y)
+            pos2idx[(x, y)] = idx
             beads[idx] = grid[x][y]
-            n2loc[idx] = (x, y)
-            loc2n[(x, y)] = idx
-            nx = x + dx[direction]
-            ny = y + dy[direction]
+            nx = x + dx[dd]
+            ny = y + dy[dd]
             if (nx, ny) == (0, -1):
                 return
             idx += 1
             x, y = nx, ny
+        dd = (dd + 1) % 4
         move += 1
-        direction = (direction + 1) % 4
         if move == 2:
             dist += 1
             move = 0
@@ -30,78 +30,78 @@ def initialize():
 
 def blizzard(d, s):
     destroy(d, s)
-    tidy_up()
+    cleanup()
     while True:
         if not explode():
             break
-        tidy_up()
+        cleanup()
     change()
 
 
 def destroy(d, s):
-    dx = (-1, 1, 0, 0)
-    dy = (0, 0, -1, 1)
-    x = N // 2
-    y = N // 2
+    global beads
+    dx = (0, -1, 1, 0, 0)
+    dy = (0, 0, 0, -1, 1)
+    x, y = n // 2, n // 2
     for i in range(1, s + 1):
-        nx = x + dx[d - 1] * i
-        ny = y + dy[d - 1] * i
-        beads[loc2n[(nx, ny)]] = -1
+        nx = x + dx[d] * i
+        ny = y + dy[d] * i
+        beads[pos2idx[(nx, ny)]] = DESTROYED
+
+
+def cleanup():
+    global beads
+    destroyed_cnt = beads.count(DESTROYED)
+    beads = [bead for bead in beads if bead != DESTROYED] + [EMPTY] * destroyed_cnt
 
 
 def explode():
-    global result
+    global beads, score
     flag = False
     cnt = 0
     target = 0
-    for i in range(N ** 2):
+    for i in range(n ** 2):
         if beads[i] == beads[target]:
             cnt += 1
         else:
             if cnt >= 4:
                 flag = True
-                result += beads[target] * cnt
-                for n in range(target, i):
-                    beads[n] = -1
+                score += beads[target] * cnt
+                for j in range(target, i):
+                    beads[j] = DESTROYED
             cnt = 1
             target = i
     return flag
 
 
-def tidy_up():
-    global beads
-    destroyed_cnt = beads.count(-1)
-    beads = [bead for bead in beads if bead != -1] + [0] * destroyed_cnt
-
-
 def change():
     global beads
-    new_beads = [0]
+    new_beads = [EMPTY]
     group = []
-    for n in range(1, N ** 2, 1):
-        if not group:
-            group.append(beads[n])
-        elif beads[n] == group[0]:
-            group.append(beads[n])
+    for i in range(1, n ** 2, 1):
+        if not group or beads[i] == group[0]:
+            group.append(beads[i])
         else:
             new_beads.append(len(group))
             new_beads.append(group[0])
-            group = [beads[n]]
-    beads = [0] * (N ** 2)
+            group = [beads[i]]
+    beads = [EMPTY] * (n ** 2)
     for i in range(len(new_beads)):
-        if i >= (N ** 2):
+        if i >= (n ** 2):
             break
         beads[i] = new_beads[i]
 
 
-N, M = map(int, sys.stdin.readline().split())
-grid = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
-beads = [-1] * (N ** 2)
-n2loc = {}
-loc2n = {}
+EMPTY = 0
+DESTROYED = -1
+n, m = map(int, sys.stdin.readline().split())
+grid = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
+beads = [-1] * (n ** 2)
+idx2pos = {}
+pos2idx = {}
 initialize()
-magics = [tuple(map(int, sys.stdin.readline().split())) for _ in range(M)]
-result = 0
-for d, s in magics:
+score = 0
+for _ in range(m):
+    d, s = map(int, sys.stdin.readline().split())
     blizzard(d, s)
-print(result)
+print(score)
