@@ -2,37 +2,44 @@ import sys
 from collections import deque
 
 
+def in_range(x, y):
+    return 0 <= x < n and 0 <= y < m
+
+
 def bfs():
     global d
+    queue = deque([(r, c)])
+    visited = [[0] * m for _ in range(n)]
+    visited[r][c] = 1
     cnt = 1
-    queue = deque([])
-    queue.append((r, c))
     while queue:
         x, y = queue.popleft()
-        clean = False
+        clean = 0
         for _ in range(4):
-            d = (d + 3) % 4
+            d = (d - 1) % 4
             nx = x + dx[d]
             ny = y + dy[d]
-            if 0 <= nx < n and 0 <= ny < m and room[nx][ny] == 0 and not visited[nx][ny]:
+            if in_range(nx, ny) and not visited[nx][ny] and room[nx][ny] == NOT_CLEAND:
                 queue.append((nx, ny))
-                visited[nx][ny] = True
+                visited[nx][ny] = 1
                 cnt += 1
-                clean = True
+                clean = 1
                 break
         if not clean:
-            if room[x - dx[d]][y - dy[d]] == 1:
+            nx = x - dx[d]
+            ny = y - dy[d]
+            if room[nx][ny] == WALL:
                 print(cnt)
                 break
             else:
-                queue.append((x - dx[d], y - dy[d]))
+                queue.append((nx, ny))
 
 
+NOT_CLEAND = 0
+WALL = 1
+dx = (-1, 0, 1, 0)
+dy = (0, 1, 0 , -1)
 n, m = map(int, sys.stdin.readline().split())
 r, c, d = map(int, sys.stdin.readline().split())
-dx = [-1, 0, 1, 0]
-dy = [0, 1, 0, -1]
 room = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
-visited = [[False] * m for _ in range(n)]
-visited[r][c] = True
 bfs()
