@@ -2,33 +2,39 @@ import sys
 from collections import deque
 
 
-def bfs(y, x):
-    queue = deque([])
-    queue.append((y, x))
+def in_range(r, c):
+    return 0 <= r < n and 0 <= c < m
+
+
+def bfs(r, c):
+    global visited
+    queue = deque([(r, c)])
+    visited[r][c] = 1
     while queue:
-        y, x = queue.popleft()
-        for i in range(4):
-            ny = y + dy[i]
-            nx = x + dx[i]
-            if 0 <= ny < n and 0 <= nx < m and field[ny][nx] == 1:
-                queue.append((ny, nx))
-                field[ny][nx] = -1
+        r, c = queue.popleft()
+        for dr, dc in dirs:
+            nr = r + dr
+            nc = c + dc
+            if in_range(nr, nc) and not visited[nr][nc] and field[nr][nc] == CABBAGE:
+                queue.append((nr, nc))
+                visited[nr][nc] = 1
 
 
+EMPTY = 0
+CABBAGE = 1
+dirs = ((-1, 0), (1, 0), (0, -1), (0, 1))
 t = int(sys.stdin.readline())
-dy = [-1, 1, 0, 0]
-dx = [0, 0, 1, -1]
 for _ in range(t):
     m, n, k = map(int, sys.stdin.readline().split())
-    field = [[0] * (m + 1) for _ in range(n + 1)]
-    visited = [[False] * (m + 1) for _ in range(n + 1)]
+    field = [[EMPTY] * (m + 1) for _ in range(n + 1)]
     for _ in range(k):
         x, y = map(int, sys.stdin.readline().split())
-        field[y][x] = 1
+        field[y][x] = CABBAGE
     cnt = 0
-    for y in range(n + 1):
-        for x in range(m + 1):
-            if field[y][x] == 1:
-                bfs(y, x)
+    visited = [[0] * (m + 1) for _ in range(n + 1)]
+    for i in range(n):
+        for j in range(m):
+            if field[i][j] == CABBAGE and not visited[i][j]:
+                bfs(i, j)
                 cnt += 1
     print(cnt)
